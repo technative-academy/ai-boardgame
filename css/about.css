@@ -50,16 +50,21 @@
 }
 
 .tab-btn:hover{
-    box-shadow: 0 7px 15px rgba(12, 90, 110, 0.18);
+    transform: translateY(-2px);
+    background: #273d5a;
+    border-color: #22344d;
+    box-shadow: 0 12px 24px rgba(24, 39, 59, 0.42);
 }
 
 
 
 
 .tab-btn.active {
-  background-color: #12849e;
-  border-color: #12849e;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  background-color: var(--colour-primary);
+  border-color: var(--colour-primary);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 8px 18px color-mix(in srgb, var(--colour-primary) 34%, transparent);
 }
 
 
