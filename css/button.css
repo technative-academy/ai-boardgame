@@ -4,86 +4,110 @@
   align-items: center;
 }
 
-.button {
-  padding: var(--spacing-s) var(--spacing-m);
-  border-radius: var(--border-radius-s);
-  cursor: pointer;
-  transition: all 0.25s;
-  font-family: "Amatic SC", cursive;
+:root {
+  --button-primary: var(--colour-primary);
+  --button-primary-hover: #1598b3;
+  --button-primary-active: #117e96;
+  --button-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.button:disabled {
-  opacity: 0.3;
+:is(button:not(.header__menu-toggle), a.btn) {
+  font-size: 1rem;
+  padding: 0.78em 2em;
+  font-weight: 600;
+  font-family: var(--button-font);
+  background: var(--button-primary);
+  color: #ffffff;
+  border: 1px solid var(--button-primary);
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.6em;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.15;
+  text-decoration: none;
+  isolation: isolate;
+  box-shadow: 0 8px 16px rgba(13, 81, 97, 0.22);
+  transition:
+    transform 140ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+:is(button:not(.header__menu-toggle), a.btn)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.24)
+  );
+  z-index: -2;
   pointer-events: none;
 }
 
-.button--primary {
-  border: 1px solid var(--colour-primary);
-  background: var(--colour-primary);
-  color: var(--colour-text-light);
+:is(button:not(.header__menu-toggle), a.btn)::after {
+  content: "";
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 500ms;
+  background-color: rgba(21, 152, 179, 0.6);
+  border-radius: 9999px;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
 }
 
-.button--primary:hover {
-  background: var(--colour-background-white);
-  color: var(--colour-primary);
+:is(button:not(.header__menu-toggle), a.btn):hover {
+  background: var(--button-primary-hover);
+  border-color: var(--button-primary-hover);
 }
 
-.button--secondary {
-  background: transparent;
-  border: 1px solid var(--colour-background-light);
-  color: var(--colour-primary);
+:is(button:not(.header__menu-toggle), a.btn):hover::after {
+  width: 14em;
+  height: 14em;
 }
 
-.button--secondary:hover {
-  border-color: var(--colour-primary);
+:is(button:not(.header__menu-toggle), a.btn):active {
+  transform: scale(0.97);
+  background: var(--button-primary-active);
+  border-color: var(--button-primary-active);
 }
 
-
-
-.btn {
-  padding: 12px 28px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none;
-  outline: none;
+:is(button:not(.header__menu-toggle), a.btn):focus-visible {
+  outline: 3px solid rgba(29, 188, 224, 0.35);
+  outline-offset: 2px;
 }
 
-.btn-primary {
-  background-color: var(--colour-primary);
-  color: white;
-  border: none;
-  
+:is(button:not(.header__menu-toggle), a.btn):disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  box-shadow: none;
 }
 
-.btn-primary:hover {
-  background-color: var(--colour-primary-dark);
-  color: white;
-  border: none;
+:is(button:not(.header__menu-toggle), a.btn):disabled::after {
+  display: none;
 }
 
-.btn-primary:active {
-  transform: translateY(1px); 
-  filter: brightness(0.8);   
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+.card-banner :is(.ask__button-example, .search_offer, .search__offer) {
+  padding: 0.45em 1em;
+  font-size: 0.86rem;
+  border-radius: 999px;
+  box-shadow: none;
 }
 
-
-.btn-outline{
-  background-color: transparent;
-  color: var(--colour-primary);
-  border: 1px solid var(--colour-secondary);
-}
-
-.btn-outline:hover{
-  color: var(--colour-primary-dark);
-  border-color: var(--colour-primary-dark);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.btn-outline:active {
-  transform: scale(0.98); 
+@media (prefers-reduced-motion: reduce) {
+  :is(button:not(.header__menu-toggle), a.btn),
+  :is(button:not(.header__menu-toggle), a.btn)::after {
+    transition: none;
+  }
 }
