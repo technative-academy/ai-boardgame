@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script type="module" defer src="./js/script.js"></script>
   </head>
-  <body>
+  <body class="home-page">
     <header class="header">
       <div class="header__content">
         <a href="./index.html" class="header__logo">
@@ -40,44 +40,55 @@
       </div>
     </header>
     <main class="main">
-      <div class="main-home-container">
-        <div class="main-home-column-one">
-          <h2>We do AI</h2>
-          <h2 class="home-h2">(via ChatGPT)</h2>
-          <p>
-            Ask us a question , we'll secretly pass it on to ChatGPT and will
-            return the result pretending that we generated it ourselves
+      <section class="home-card" aria-labelledby="home-card-title">
+        <div class="home-card__intro">
+          <div class="home-card__copy">
+            <h2 id="home-card-title" class="home-card__title">
+              The Table Guru 
+            </h2>
+            <p class="home-card__kicker">Built for board gamers</p>
+            <p class="home-card__description">
+              From tricky rules to strategy choices and game recommendations,
+              Table Guru gives fast, clear answers so your table keeps moving.
+            </p>
+          </div>
+          <figure class="home-card__media">
+            <img
+              class="home-card__image"
+              src="./public/images/game.webp"
+              alt="Chess pieces on a board"
+            />
+          </figure>
+        </div>
+        <div class="home-card__actions">
+          <div class="home-card__action">
+            <p>
+              Ask about setup, turns, scoring, or tactics and get practical
+              guidance in seconds.
+            </p>
+            <a href="./ask/index.html" class="btn btn-primary"
+              >Ask the Table Guru!</a
+            >
+          </div>
+          <div class="home-card__action">
+            <p>
+              Explore the shop for game-night extras, thoughtful gifts, and
+              table-ready essentials.
+            </p>
+            <a href="./shop/index.html" class="btn btn-outline"
+              >Visit Our Shop</a
+            >
+          </div>
+        </div>
+        <footer class="home-card__footer">
+          <p class="home-card__links">
+            <a href="#" class="home-card__link">Terms and Conditions</a>
+            <span>|</span>
+            <a href="#" class="home-card__link">Cookies</a>
           </p>
-        </div>
-        <div class="main-home-column-two">
-          <img class="home-img" src="./images/home-page-column.png" />
-        </div>
-      </div>
-      <hr class="home-hr-style-two" />
-      <hr class="home-hr-style-two" />
-      <div class="second-home-container">
-        <div class="second-home-column-one">
-          <p>
-            Post an open-ended question and see some suggestions from our
-            specially trained AI
-          </p>
-          <button class="btn btn-primary">Ask the Table Guru!</button>
-        </div>
-        <div class="second-home-column-two">
-          <p>
-            Visit our shop and buy some of our pointless tat so that we can
-            afford to keep going
-          </p>
-          <button class="btn btn-outline">Ask the Table Guru!</button>
-        </div>
-      </div>
+          <p class="home-card__copyright">&copy; 2026</p>
+        </footer>
+      </section>
     </main>
-    <footer class="footer">
-      <p class="footer__links">
-        <a href="#" class="footer__link">Terms and Conditions</a> |
-        <a href="#" class="footer__link">Cookies</a>
-      </p>
-      <p class="footer__copyright">&copy; 202x</p>
-    </footer>
   </body>
 </html>

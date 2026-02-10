@@ -25,12 +25,14 @@ class Shop {
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => this.search(e));
 
-    this.offerButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      this.searchInput.value = "offer";
-      this.isOfferSearch = true;
-      this.search();
-    });
+    if (this.offerButton) {
+      this.offerButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.searchInput.value = "offer";
+        this.isOfferSearch = true;
+        this.search();
+      });
+    }
 
     if (this.sortSelect) {
       this.sortSelect.addEventListener("change", () => this.search());
