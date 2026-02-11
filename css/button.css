@@ -8,6 +8,7 @@
   --button-primary: var(--colour-primary);
   --button-primary-hover: #273d5a;
   --button-primary-active: #1f324a;
+  --button-text: #ffffff;
   --button-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -22,9 +23,10 @@
   font-weight: 600;
   font-family: var(--button-font);
   background: var(--button-primary);
-  color: #ffffff;
+  color: var(--button-text);
   border: 1px solid var(--button-primary);
   position: relative;
+  z-index: 0;
   overflow: hidden;
   border-radius: 0.6em;
   cursor: pointer;
@@ -39,7 +41,22 @@
     transform 140ms ease,
     box-shadow 220ms ease,
     border-color 220ms ease,
-    background-color 220ms ease;
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ) > * {
+  position: relative;
+  z-index: 1;
+}
+
+a.btn:visited {
+  color: var(--button-text);
 }
 
 :is(
@@ -90,6 +107,7 @@
   ):hover {
   transform: translateY(-2px);
   background: var(--button-primary-hover);
+  color: var(--button-text);
   border-color: var(--button-primary-hover);
   box-shadow: 0 12px 22px color-mix(in srgb, var(--button-primary) 48%, transparent);
 }
@@ -112,6 +130,7 @@
   ):active {
   transform: translateY(0) scale(0.96);
   background: var(--button-primary-active);
+  color: var(--button-text);
   border-color: var(--button-primary-active);
 }
 
