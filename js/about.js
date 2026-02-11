@@ -1,11 +1,14 @@
 
 
-//It is not about "about" section. This code block just for changing footer's date.
+// Keep footer year current across both legacy and card footer variants.
 const thisYear = new Date();
-const footerDate = document.querySelector(".footer__copyright");
-console.log(footerDate);
+const footerDate = document.querySelector(
+  ".card-legal-footer__copyright, .footer__copyright"
+);
 
-footerDate.textContent = "\u00A9 " + thisYear.getFullYear();
+if (footerDate) {
+  footerDate.textContent = "\u00A9 " + thisYear.getFullYear();
+}
 
 
 
@@ -68,6 +71,5 @@ function changeTextContent(tabParameterValueForContent){
        }
 
 }
-
 
 

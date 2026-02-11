@@ -6,20 +6,27 @@
 
 :root {
   --button-primary: var(--colour-primary);
-  --button-primary-hover: #1598b3;
-  --button-primary-active: #117e96;
+  --button-primary-hover: #273d5a;
+  --button-primary-active: #1f324a;
+  --button-text: #ffffff;
   --button-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-:is(button:not(.header__menu-toggle), a.btn) {
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ) {
   font-size: 1rem;
   padding: 0.78em 2em;
   font-weight: 600;
   font-family: var(--button-font);
   background: var(--button-primary);
-  color: #ffffff;
+  color: var(--button-text);
   border: 1px solid var(--button-primary);
   position: relative;
+  z-index: 0;
   overflow: hidden;
   border-radius: 0.6em;
   cursor: pointer;
@@ -29,15 +36,35 @@
   line-height: 1.15;
   text-decoration: none;
   isolation: isolate;
-  box-shadow: 0 8px 16px rgba(13, 81, 97, 0.22);
+  box-shadow: 0 8px 16px color-mix(in srgb, var(--button-primary) 32%, transparent);
   transition:
     transform 140ms ease,
     box-shadow 220ms ease,
     border-color 220ms ease,
-    background-color 220ms ease;
+    background-color 220ms ease,
+    color 220ms ease;
 }
 
-:is(button:not(.header__menu-toggle), a.btn)::before {
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ) > * {
+  position: relative;
+  z-index: 1;
+}
+
+a.btn:visited {
+  color: var(--button-text);
+}
+
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  )::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -51,11 +78,16 @@
   pointer-events: none;
 }
 
-:is(button:not(.header__menu-toggle), a.btn)::after {
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  )::after {
   content: "";
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
   transition-duration: 500ms;
-  background-color: rgba(21, 152, 179, 0.6);
+  background-color: rgba(0, 0, 0, 0.24);
   border-radius: 9999px;
   width: 0;
   height: 0;
@@ -67,47 +99,84 @@
   pointer-events: none;
 }
 
-:is(button:not(.header__menu-toggle), a.btn):hover {
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ):hover {
+  transform: translateY(-2px);
   background: var(--button-primary-hover);
+  color: var(--button-text);
   border-color: var(--button-primary-hover);
+  box-shadow: 0 12px 22px color-mix(in srgb, var(--button-primary) 48%, transparent);
 }
 
-:is(button:not(.header__menu-toggle), a.btn):hover::after {
-  width: 14em;
-  height: 14em;
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ):hover::after {
+  width: 20em;
+  height: 20em;
 }
 
-:is(button:not(.header__menu-toggle), a.btn):active {
-  transform: scale(0.97);
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ):active {
+  transform: translateY(0) scale(0.96);
   background: var(--button-primary-active);
+  color: var(--button-text);
   border-color: var(--button-primary-active);
 }
 
-:is(button:not(.header__menu-toggle), a.btn):focus-visible {
-  outline: 3px solid rgba(29, 188, 224, 0.35);
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--button-primary) 52%, transparent);
   outline-offset: 2px;
 }
 
-:is(button:not(.header__menu-toggle), a.btn):disabled {
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ):disabled {
   opacity: 0.45;
   pointer-events: none;
   box-shadow: none;
 }
 
-:is(button:not(.header__menu-toggle), a.btn):disabled::after {
+:is(
+    button:not(.header__menu-toggle):not(.ask__button-example):not(
+        .search__offer
+      ),
+    a.btn
+  ):disabled::after {
   display: none;
 }
 
-.card-banner :is(.ask__button-example, .search_offer, .search__offer) {
-  padding: 0.45em 1em;
-  font-size: 0.86rem;
-  border-radius: 999px;
-  box-shadow: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  :is(button:not(.header__menu-toggle), a.btn),
-  :is(button:not(.header__menu-toggle), a.btn)::after {
+  :is(
+      button:not(.header__menu-toggle):not(.ask__button-example):not(
+          .search__offer
+        ),
+      a.btn
+    ),
+  :is(
+      button:not(.header__menu-toggle):not(.ask__button-example):not(
+          .search__offer
+        ),
+      a.btn
+    )::after {
     transition: none;
   }
 }
