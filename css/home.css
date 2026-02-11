@@ -211,7 +211,7 @@
   .home-page .main {
     padding-left: var(--spacing-s);
     padding-right: var(--spacing-s);
-    margin-top: calc(-1 * var(--spacing-l));
+    margin-top: calc(-1 * var(--spacing-xl));
   }
 
   .home-card {
@@ -221,7 +221,11 @@
   .home-card__intro {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 24px 18px 18px;
+    padding: 30px 18px 18px;
+  }
+
+  .home-page .home-card__copy {
+    padding-top: 14px;
   }
 
   .home-card__media {

@@ -11,3 +11,12 @@
   position: relative;
   z-index: 3;
 }
+
+@media (max-width: 768px) {
+  body:not(.home-page) .main {
+    margin-left: var(--spacing-s);
+    margin-right: var(--spacing-s);
+    padding-left: var(--spacing-s);
+    padding-right: var(--spacing-s);
+  }
+}

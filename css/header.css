@@ -333,9 +333,9 @@
   }
 
   .header::before {
-    background-position: center 45%;
-    background-size: 145% auto;
-    opacity: 0.58;
+    background-position: center 42%;
+    background-size: cover;
+    opacity: var(--header-illustration-opacity);
   }
 
   .header__content {
@@ -350,6 +350,15 @@
 
   .header__menu-toggle {
     display: inline-flex;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  .header__menu-toggle:hover {
+    border-color: transparent;
+    background: transparent;
   }
 
   .header__nav {
@@ -416,7 +425,9 @@
   }
 
   .header__titles {
-    top: 33%;
+    top: 53%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
     gap: 10px;
   }
 
@@ -443,7 +454,7 @@
 
   .header__menu-toggle {
     font-size: 0.68rem;
-    padding: 6px 9px;
+    padding: 0;
   }
 
   .header__hamburger,
@@ -453,7 +464,7 @@
   }
 
   .header__titles {
-    top: 35%;
+    top: 53%;
     padding: 0 14px;
   }
 

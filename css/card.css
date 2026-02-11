@@ -245,8 +245,9 @@ input {
 
   .main-card__footer {
     margin-top: var(--spacing-l);
-    margin-left: calc(-1 * var(--spacing-l));
-    margin-right: calc(-1 * var(--spacing-l));
+    margin-left: calc(-1 * var(--spacing-s));
+    margin-right: calc(-1 * var(--spacing-s));
     margin-bottom: calc(-1 * var(--spacing-l));
+    border-radius: 0 0 var(--border-radius-l) var(--border-radius-l);
   }
 }
