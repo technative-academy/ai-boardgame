@@ -28,8 +28,15 @@ class Shop {
     if (this.offerButton) {
       this.offerButton.addEventListener("click", (e) => {
         e.preventDefault();
-        this.searchInput.value = "offer";
-        this.isOfferSearch = true;
+        if (this.isOfferSearch) {
+          this.searchInput.value = "";
+          this.isOfferSearch = false;
+          this.offerButton.textContent = "Limited Offers";
+        } else {
+          this.searchInput.value = "offer";
+          this.isOfferSearch = true;
+          this.offerButton.textContent = "See all products";
+        }
         this.search();
       });
     }
@@ -80,7 +87,7 @@ class Shop {
     } finally {
       this.loading.classList.remove("is-loading");
     }
-    this.isOfferSearch = false;
+    /*this.isOfferSearch = false;*/
   }
 
   buildQuery() {
