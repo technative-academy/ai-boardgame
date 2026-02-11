@@ -40,13 +40,107 @@
 .search__footer {
   margin-top: var(--spacing-l);
   display: flex;
+  gap: var(--spacing-m);
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .search__result-count {
+  margin: 0;
   font-size: var(--font-size-small);
   font-style: italic;
+  color: color-mix(in srgb, var(--colour-primary) 76%, black);
+}
+
+.search__sort {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 260px;
+  max-width: 100%;
+  min-height: 44px;
+  border: 1px solid color-mix(in srgb, var(--colour-primary) 32%, white);
+  border-radius: var(--border-radius-m);
+  background-color: var(--colour-background-white);
+  color: color-mix(in srgb, var(--colour-primary) 70%, black);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 0.7rem 2.8rem 0.7rem 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 5px 14px color-mix(in srgb, var(--colour-primary) 22%, transparent);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--colour-primary) 50%),
+    linear-gradient(135deg, var(--colour-primary) 50%, transparent 50%),
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--colour-primary) 14%, white),
+      color-mix(in srgb, var(--colour-primary) 14%, white)
+    );
+  background-position:
+    calc(100% - 1rem) calc(50% - 1px),
+    calc(100% - 0.65rem) calc(50% - 1px),
+    calc(100% - 2.2rem) 50%;
+  background-size:
+    7px 7px,
+    7px 7px,
+    1px 62%;
+  background-repeat: no-repeat;
+}
+
+.search__sort:hover {
+  border-color: var(--colour-primary);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--colour-primary) 28%, transparent);
+  background-color: color-mix(in srgb, var(--colour-background-white) 86%, #f2f6fc);
+}
+
+.search__sort:focus {
+  outline: none;
+}
+
+.search__sort:focus-visible {
+  outline: none;
+  border-color: var(--colour-primary);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--colour-primary) 20%, white),
+    0 8px 18px color-mix(in srgb, var(--colour-primary) 26%, transparent);
+}
+
+.search__sort option {
+  background-color: var(--colour-background-white);
+  color: var(--colour-text-dark);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+  .search__footer {
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .search__result-count {
+    width: 100%;
+    text-align: left;
+  }
+
+  .search__sort {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .search__sort {
+    font-size: 0.9rem;
+    padding-left: 0.8rem;
+    padding-right: 2.5rem;
+  }
 }
 
 .search__loading {
