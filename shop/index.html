@@ -81,8 +81,11 @@
         </div>
         <div class="search__footer">
           <p class="search__result-count"></p>
-          <select class="search__sort">
-            <option>Sort by: Price (low to high)</option>
+          <select class="search__sort" aria-label="Sort products">
+            <option value="price-asc">Sort by: Price (low to high)</option>
+            <option value="price-desc">Sort by: Price (high to low)</option>
+            <option value="rating">Sort by: Rating (highest first)</option>
+            <option value="title">Sort by: Title (A to Z)</option>
           </select>
         </div>
         <p class="search__loading">Loading...</p>
