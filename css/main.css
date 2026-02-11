@@ -4,10 +4,10 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: calc(-1 * var(--spacing-xl));
+  margin-bottom: var(--spacing-l);
   background: var(--colour-background-white);
   border-radius: var(--border-radius-l);
   box-shadow: var(--box-shadow);
   position: relative;
   z-index: 3;
-
 }

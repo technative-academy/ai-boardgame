@@ -18,6 +18,7 @@
   position: relative;
   width: var(--card-width);
   height: var(--card-height);
+  margin-bottom: var(--spacing-m);
   border-radius: var(--card-radius);
   background: radial-gradient(
     120% 90% at 20% 0%,
