@@ -180,3 +180,21 @@ a.btn:visited {
     transition: none;
   }
 }
+
+@media (max-width: 768px) {
+  .buttons {
+    gap: var(--spacing-s);
+    width: 100%;
+  }
+
+  :is(
+      button:not(.header__menu-toggle):not(.ask__button-example):not(
+          .search__offer
+        ),
+      a.btn
+    ) {
+    font-size: 0.9rem;
+    padding: 0.6em 1em;
+    line-height: 1.1;
+  }
+}

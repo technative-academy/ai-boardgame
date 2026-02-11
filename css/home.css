@@ -211,7 +211,7 @@
   .home-page .main {
     padding-left: var(--spacing-s);
     padding-right: var(--spacing-s);
-    margin-top: calc(-1 * var(--spacing-l));
+    margin-top: calc(-1 * var(--spacing-xl));
   }
 
   .home-card {
@@ -221,7 +221,11 @@
   .home-card__intro {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 24px 18px 18px;
+    padding: 30px 18px 18px;
+  }
+
+  .home-page .home-card__copy {
+    padding-top: 14px;
   }
 
   .home-card__media {
@@ -242,9 +246,42 @@
   }
 
   .home-card__footer {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
     text-align: center;
-    padding: 14px 16px;
+    padding: 14px 12px;
+  }
+
+  .home-card__links {
+    gap: 6px;
+    font-size: 0.84rem;
+    white-space: nowrap;
+  }
+
+  .home-card__links .home-card__link {
+    white-space: nowrap;
+  }
+
+  .home-card__links .home-card__link:first-of-type {
+    font-size: 0;
+  }
+
+  .home-card__links .home-card__link:first-of-type::after {
+    content: "T&C";
+    font-size: 0.84rem;
+  }
+
+  .home-card__copyright {
+    font-size: 0.84rem;
+    white-space: nowrap;
+  }
+
+  .home-card__copyright::before {
+    content: "|";
+    margin-right: 6px;
+    opacity: 0.85;
   }
 }

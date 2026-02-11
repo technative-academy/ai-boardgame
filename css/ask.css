@@ -76,3 +76,16 @@
 .ask__loading.is-loading {
   display: block;
 }
+
+@media (max-width: 768px) {
+  .ask__buttons .buttons {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .ask__button-reset,
+  .ask__button-ask {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
