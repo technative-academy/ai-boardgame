@@ -23,19 +23,23 @@ class Shop {
   init() {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
-    this.searchButton.addEventListener("click", (e) => this.search(e));
+    this.searchButton.addEventListener("click", (e) =>
+      this.search(e, { scrollToProducts: true })
+    );
 
     if (this.offerButton) {
       this.offerButton.addEventListener("click", (e) => {
         e.preventDefault();
         this.searchInput.value = "offer";
         this.isOfferSearch = true;
-        this.search();
+        this.search(undefined, { scrollToProducts: true });
       });
     }
 
     if (this.sortSelect) {
-      this.sortSelect.addEventListener("change", () => this.search());
+      this.sortSelect.addEventListener("change", (e) =>
+        this.search(e, { scrollToProducts: true, preserveResults: true })
+      );
     }
     this.checkInput();
     this.search();
@@ -45,15 +49,17 @@ class Shop {
     this.searchButton.disabled = this.searchInput.value.length === 0;
   }
 
-  async search(e) {
+  async search(
+    e,
+    { scrollToProducts = false, preserveResults = false } = {}
+  ) {
     if (e) e.preventDefault();
 
     this.loading.classList.add("is-loading");
-    this.productsContainer.classList.remove("is-shown");
-    this.searchResultCount.textContent = "";
-
-    while (this.productsList.firstChild) {
-      this.productsList.removeChild(this.productsList.lastChild);
+    if (!preserveResults) {
+      this.productsContainer.classList.remove("is-shown");
+      this.searchResultCount.textContent = "";
+      this.clearProductsList();
     }
 
     try {
@@ -66,13 +72,18 @@ class Shop {
       }
       console.log("query=" + query);
 
-      const sort = this.getSort();
+      const selectedSort = this.getSort();
+      const sort = this.getApiSort(selectedSort);
       const results = await fetchProducts({ query, sort });
       console.log("results:", results);
       const products = results.map((product, index) =>
         this.mapProduct(product, index)
       );
-      this.processProducts(products);
+      const sortedProducts = this.sortProducts(products, selectedSort);
+      this.processProducts(sortedProducts);
+      if (scrollToProducts) {
+        this.scrollToProducts();
+      }
     } catch (error) {
       console.error(error.message);
       this.searchResultCount.textContent = "0 products found";
@@ -81,6 +92,27 @@ class Shop {
       this.loading.classList.remove("is-loading");
     }
     this.isOfferSearch = false;
+  }
+
+  scrollToProducts() {
+    if (!this.productsContainer?.classList.contains("is-shown")) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    this.productsContainer.scrollIntoView({
+      behavior: reducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
+  }
+
+  clearProductsList() {
+    while (this.productsList.firstChild) {
+      this.productsList.removeChild(this.productsList.lastChild);
+    }
   }
 
   buildQuery() {
@@ -93,12 +125,17 @@ class Shop {
 
   getSort() {
     if (!this.sortSelect) {
-      return "price";
+      return "price-asc";
     }
-    const value = this.sortSelect.value.toLowerCase();
-    if (value.includes("price")) return "price";
-    if (value.includes("rating")) return "rating";
-    if (value.includes("title")) return "title";
+    const allowedSorts = ["price-asc", "price-desc", "rating", "title"];
+    const selectedSort = this.sortSelect.value.toLowerCase();
+    return allowedSorts.includes(selectedSort) ? selectedSort : "price-asc";
+  }
+
+  getApiSort(selectedSort) {
+    if (selectedSort === "rating" || selectedSort === "title") {
+      return selectedSort;
+    }
     return "price";
   }
 
@@ -119,6 +156,7 @@ class Shop {
       title,
       description,
       stars: this.normaliseStars(product?.stars),
+      priceValue: this.parsePrice(product?.price) ?? 0,
       price: this.formatPrice(product?.price),
     };
   }
@@ -147,12 +185,33 @@ class Shop {
     return Math.min(5, Math.max(1, rounded));
   }
 
-  formatPrice(price) {
+  parsePrice(price) {
     if (price === null || price === undefined) {
-      return "£0.00";
+      return null;
     }
+
     const numeric = Number(price);
     if (Number.isFinite(numeric)) {
+      return numeric;
+    }
+
+    if (typeof price === "string") {
+      const cleaned = price.replace(/[^0-9.-]/g, "");
+      if (cleaned.length === 0) {
+        return null;
+      }
+      const parsed = Number(cleaned);
+      if (Number.isFinite(parsed)) {
+        return parsed;
+      }
+    }
+
+    return null;
+  }
+
+  formatPrice(price) {
+    const numeric = this.parsePrice(price);
+    if (numeric !== null) {
       return `£${numeric.toFixed(2)}`;
     }
     if (typeof price === "string") {
@@ -161,8 +220,31 @@ class Shop {
     return "£0.00";
   }
 
+  sortProducts(products, selectedSort) {
+    const items = Array.isArray(products) ? [...products] : [];
+
+    if (selectedSort === "price-desc") {
+      return items.sort((a, b) => b.priceValue - a.priceValue);
+    }
+
+    if (selectedSort === "rating") {
+      return items.sort(
+        (a, b) => b.stars - a.stars || a.priceValue - b.priceValue
+      );
+    }
+
+    if (selectedSort === "title") {
+      return items.sort((a, b) =>
+        a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+      );
+    }
+
+    return items.sort((a, b) => a.priceValue - b.priceValue);
+  }
+
   processProducts(products) {
     const items = Array.isArray(products) ? products : [];
+    this.clearProductsList();
 
     this.searchResultCount.textContent = `${items.length} products found`;
 
